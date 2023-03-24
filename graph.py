@@ -23,15 +23,35 @@ class Graph:
          self.graph[u].append(v)
 
    def get_reachable_nodes(self, start, distance):
-      print(self.graph)
-      pass
-
+      visited = [False] * (max(self.graph) + 1)
+      queue = []
+      queue.append(start)
+      visited[start] = True
+      count_distance = -1
+      return_string = " "
+      while queue:
+         s = queue.pop(0)
+         return_string += " " + str(s)
+         for i in self.graph[s]:
+            if not visited[i]:
+               queue.append(i)
+               visited[i] = True
+            if visited[i]:
+               continue
+         count_distance += 1
+         if count_distance <= distance:
+            continue
+         if count_distance > distance:
+            break
+      return return_string
 
 if __name__ == '__main__':
 
      params = input().rstrip().split()
      start_node =  params[0];
      distance = params[1]
+     start_node = int(start_node)
+     distance = int(distance)
      first_multiple_input = input().rstrip().split()
      n = int(first_multiple_input[0])
      m = int(first_multiple_input[1])
@@ -41,6 +61,8 @@ if __name__ == '__main__':
 
      for e in range(m):
         edge = input().rstrip().split()
-        g.add_edge(edge[0],edge[1])
+        res = [int(i) for i in edge]
+        g.add_edge(res[0],res[1])
 
      reachable = g.get_reachable_nodes(start_node, distance)
+     print(reachable)
