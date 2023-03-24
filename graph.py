@@ -36,8 +36,6 @@ class Graph:
             if not visited[i]:
                queue.append(i)
                visited[i] = True
-            if visited[i]:
-               continue
          count_distance += 1
          if count_distance <= distance:
             continue
